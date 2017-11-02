@@ -2,14 +2,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "minix.h"
+//#include "minix.h"
 
-char* imagePath;
-int isMounted = 0;
+char* path;
+
+//indicates whether image is mounted or not
+int mounted = 0; 
+
+//make character global variable to hold the input text. Everytime new variable, put through to function
+//quit, print, etc.
 
 int main() {
 
-	char *welcome = "Welcome to the minix console.\n";
+	char *introString = "Welcome to MINIX.\n";
 	write(1, welcome, strlen(welcome));
 
 	char* input;
