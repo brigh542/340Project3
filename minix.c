@@ -6,3 +6,5 @@
 #include <sys/stat.h>
 
 #include "minix.h"
+
+void showsuper(){}
