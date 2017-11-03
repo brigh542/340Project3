@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-//#include <sys/types.h>
-//#include <sys/stat.h>
 #define BUF 10000
 
 #include "minix.h"
@@ -29,7 +27,7 @@ int main(){
 
     userInput = (char *)calloc(BUF, 1);
 
-    write(1, "minix>>",7);
+    write(1, "minix:",6);
     read(0, userInput, BUF);
 
     //use string compare to
