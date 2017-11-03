@@ -2,98 +2,100 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-//#include "minix.h"
+//#include <sys/types.h>
+//#include <sys/stat.h>
+#define BUF 10000
 
-char* path;
+#include "minix.h"
 
-//indicates whether image is mounted or not
-int mounted = 0; 
+char *image;
 
-//make character global variable to hold the input text. Everytime new variable, put through to function
-//quit, print, etc.
 
-int main() {
+//indicates whether image is mounted
+int mounted=0;
 
-	char *introString = "Welcome to MINIX.\n";
-	write(1, welcome, strlen(welcome));
+int main(){
 
-	char* input;
+  char *intro = "Welcome to MINIX.\n";
 
-	while (1) {
-		input = (char *) calloc(10000, 1);
+  write(1, intro, strlen(welcome)); //write welcome message, size
 
-		write(1, "minix>>", 7);
-		read(0, input, 10000);
+  //holds standard input
+  char *userInput;
 
-		if (strcmp(input, "help\n") == 0) {
-			help();
-		} else if (strstr(input, "minimount") != NULL) {
+  //while (1) - indicates that no error or nothing written
+  //calls functions based on user input
+  while(1) {
 
-			imagePath = (char *)calloc(265, 1);
-			strncpy(imagePath, strstr(input, "minimount") + 10,
-					strlen(strstr(input, "minimount") + 11));
+    userInput = (char *)calloc(BUF, 1);
 
-			if( access( imagePath, F_OK ) != -1 ) {
-			    isMounted = 1;
-				write(1, "Disk mounted.\n", 14);
-			} else {
-			    write(1, "File does not exist at that location\n", 37);
-			}
+    write(1, "minix>>",7);
+    read(0, userInput, BUF);
 
-		} else if ((strstr(input, "miniumount\n")) != NULL) {
+    //use string compare to
+    if(strcmp(userInput, "minimount")!= NULL){
+      //call minimount function
 
-			isMounted = 0;
-			free(imagePath);
-			write(1, "Disk unmounted.\n", 16); 
+    }
 
-		} else if (strstr(input, "showsuper\n") != NULL) {
+    else if (strcmp(userInput, "miniumount")){
+      //call miniumount function
+      char *unmountMessage;
+      if(mounted == 0){
+        unmountMessage = "Disk has already been unmounted.\n";
+        write(1, unmountMessage, strlen(unmountMessage));
+      }
+      else{
+        free(image);
+        unmountMessage = "Disk has been unmounted.\n";
+        write(1, unmountMessage, strlen(unmountMessage));
 
-			showsuper();
+      }
+      free(image);
+      write(1, "Disk has been unmounted.\n", 24);
 
-		} else if (strstr(input, "traverse") != NULL) {
+    }
 
-			char* lSwitch = (char *) calloc(3, 1);
-			lSwitch = strstr(input, "traverse") + 9;
+    else if(strcmp(userInput, "showsuper\n")!= NULL){
+        //call showsuper function
+        showsuper();
+    }
+    else if(strcmp(userInput, "traverse\n") != NULL){
+      //call traverse function
+      traverse(0);
 
-			if (strcmp(lSwitch, "-l\n") == 0)
-				traverse(1);
-			else
-				traverse(0);
+    }
+    else if(strcmp(userInput, "traverse -l\n") != NULL){
+      //call traverse -1
+      traverse(1);
+    }
 
-		} else if (strstr(input, "showzone") != NULL) {
+    else if (strcmp(userInput, "showzone") != NULL){
+      //call showzone function
+    }
+    else if(strcmp(userInput, "quit") != NULL){
+      //call quit function
+      quit();
+      if( userInput != NULL){
+        free(userInput);
+        userInput = NULL;
+      }
+      return 0;
+    }
+    else if(strcmp(userInput, "help\n") ==0){
+      //call help function
+      help();
+    }
+    else{
+      char *message = "Sorry, that is an invalid command. Type help to see a list of commands. \n";
+      write(1, message, strlen(message));
+    }
 
-			char* zone = (char *)calloc(5, 1);
+    free(userInput);
+    userInput=NULL;
+  }
 
-			strncpy(zone, strstr(input, "showzone") + 9,
-					strlen(strstr(input, "showzone") + 10));
-			zone[sizeof(zone) - 1] = '\0';
+  free(intro);
 
-			showzone(zone);
-
-		} else if (strstr(input, "showfile") != NULL) {
-
-			char* fileName = (char *) calloc(265, 1);
-			strncpy(fileName , strstr(input, "showfile") + 9,
-					strlen(strstr(input, "showfile") + 10));
-
-			showfile(fileName);
-
-		} else if (strstr(input, "quit") != NULL) {
-			write(1, "\nYou will now quit out of the minix shell.\n", 43);
-			free(input);
-			input = NULL;
-			return 0;
-			
-		} else {
-			char* helpMessage =
-					"Invalid Command. \nPlease type help to see the list of available commands.\n";
-			write(1, helpMessage, strlen(helpMessage));
-		}
-		free(input);
-		input = NULL;
-	}
-
-	free(welcome);
-
-	return 0;
+  return 0;
 }
