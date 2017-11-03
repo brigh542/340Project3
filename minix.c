@@ -118,6 +118,21 @@ void minimount(){
      }
 }
 
+void miniumount(){
+  char *unmountMessage;
+  if(mounted == 0){
+    unmountMessage = "Disk has already been unmounted.\n";
+    write(1, unmountMessage, strlen(unmountMessage));
+  }
+  else{
+    free(image);
+    unmountMessage = "Disk has been unmounted.\n";
+    write(1, unmountMessage, strlen(unmountMessage));
+
+  }
+  free(image);
+  write(1, "Disk has been unmounted.\n", 24);
+}
 
 
 
