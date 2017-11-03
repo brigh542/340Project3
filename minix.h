@@ -34,4 +34,7 @@ struct dir_entry {
 };
 
 
+showsuper();
+
+
 #endif
