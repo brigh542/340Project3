@@ -101,3 +101,23 @@ void showsuper(){
   }
 }
 
+void minimount(){
+    image = (char *)calloc(265, 1);
+    strncopy(image, strstr(userInput, "minimount")+10, strlen(strstr(userInput, "minimount"));
+
+    if(access(image, F_OK) != -1){
+      mounted =1;
+      char *mountedMessage = "Disk has been successfully mounted.\n";
+      
+      write(1, mountedMessage, strlen(mountedMessage));
+     }
+     else {
+       char *mountedMessage = "Sorry, the file does not exist at the location.\n";
+
+       write(1, mountedMessage, strlen(mountedMessage));
+     }
+}
+
+
+
+
