@@ -34,7 +34,13 @@ struct dir_entry {
 };
 
 
-showsuper();
+void showsuper();
+void help();
+void quit();
+void traverse(int fd, int detailPrint);
+void showzone(int fd, int zone);
+
+
 
 
 #endif
