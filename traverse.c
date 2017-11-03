@@ -5,7 +5,7 @@
 #include <time.h>
 
 // Calls from main:
-// traverse(fd,0) for short
+// traverse(fd, 0) for short
 // traverse(fd, 1) for -l flag
 
 void traverse(int fd, int detailPrint) {
