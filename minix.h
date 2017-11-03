@@ -40,7 +40,7 @@ void quit();
 void traverse(int fd, int detailPrint);
 void showzone(int fd, int zone);
 void minimount();
-
+void miniumount();
 
 
 #endif
