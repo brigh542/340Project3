@@ -1,4 +1,5 @@
 #include "minix.h"
+#define BUF 10000
 
 char* image;
 
@@ -17,10 +18,10 @@ int main() {
   	//calls functions based on user input
 	while (1) {
 	
-    userInput = (char *) calloc(BUF, 10000);
+    userInput = (char *) calloc(BUF, 1);
 
     write(1, "minix ",7);
-    read(0, userInput, buffer);
+    read(0, userInput, BUF);
 
     //use string compare to
     if(strstr(userInput, "minimount")!= NULL){
