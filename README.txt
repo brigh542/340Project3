@@ -11,9 +11,9 @@ Quit: unmounts a mounted image, if present, and exits the program
 
 Contribution:
 
-	Ryan Schreiber 50%
+	Ryan Schreiber 47%
 
-	Brighid Rancour 50%
+	Brighid Rancour 53%
 
 
 
@@ -24,7 +24,7 @@ Execution Instructions: After compiling, to execute the program, enter "minix" a
 
 
 
-Existing Bugs: 
+Existing Bugs: We were unable to get the traverse function to work correctly, and it was left out of the final implementation.
 
 
 
