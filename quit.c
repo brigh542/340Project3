@@ -1,6 +1,6 @@
 void quit() {
 	if (mounted == 1)
-		close(file);
+		free(image);
 	printf("Exiting Minix shell.");
 	exit(0);
 }
