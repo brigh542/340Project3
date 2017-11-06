@@ -17,7 +17,7 @@ int main() {
   	//calls functions based on user input
 	while (1) {
 	
-    userInput = (char *) calloc(buffer, 1);
+    userInput = (char *) calloc(BUF, 10000);
 
     write(1, "minix ",7);
     read(0, userInput, buffer);
