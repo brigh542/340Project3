@@ -14,7 +14,7 @@ void showsuper(){
    
     read(fd, buffer, 1024);
 
-    struct super_block *super = (struct super_block *) buffer;
+    struct minix_super_block *super = (struct minix_super_block *) buffer;
 
     char* temp=(char *) calloc(4,1);
 
@@ -63,7 +63,7 @@ void showsuper(){
     temp = (char *)calloc(4, 1);
 
     write(1, "max size: ", 19);
-    itoa(temp, super->s_maxsize);
+    itoa(temp, super->s_max_size);
     write(1, temp, 4);
     write(1, "\n", 1);
 
@@ -96,7 +96,7 @@ void showsuper(){
     write(1, message, strlen(message));
   }
 }
-void traverse(int showMore) {
+void traverse(int fd, int detailPrint) {
 	if (mounted == 1) {
 
 		char* buf = (char *) calloc(32, 1);
@@ -130,7 +130,7 @@ void traverse(int showMore) {
 						char* name = (char *) calloc(100, 1);
 						name = dir->name;
 
-						if (showMore == 1) {
+						if (detailPrint == 1) {
 							int pointer = (1024 * 5)
 									+ (dir->inode - 1) * 32;
 							lseek(fd, pointer, SEEK_SET);

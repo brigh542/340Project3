@@ -1,3 +1,5 @@
+#include "minix.h"
+
 void quit() {
 	if (mounted == 1)
 		free(image);

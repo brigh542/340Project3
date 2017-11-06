@@ -29,7 +29,7 @@ int main() {
       
 	image = (char *)calloc(265,1);
 
-	strncopy(image, strstr(userInput, "minimount")+10, strlen(strstr(userInput, "minimount") +11));
+	strncpy(image, strstr(userInput, "minimount")+10, strlen(strstr(userInput, "minimount") +11));
 
 	if(access(image, F_OK) != -1){
 		mounted =1;

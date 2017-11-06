@@ -25,7 +25,7 @@ extern int mounted;
 
 //declare structures!
 
-struct minix_super_block {
+typedef struct minix_super_block {
 	unsigned short s_ninodes;
 	unsigned short s_nzones;
 	unsigned short s_imap_blocks;
@@ -36,9 +36,9 @@ struct minix_super_block {
 	unsigned short s_magic;
 	unsigned short s_state;
 	unsigned int s_zones;
-};
+} minix_super_block;
 
-struct minix_inode
+typedef struct minix_inode
 {
 	unsigned short i_mode;
 	unsigned short i_uid;
@@ -47,19 +47,20 @@ struct minix_inode
 	unsigned char i_gid;
 	unsigned char i_nlinks;
 	unsigned short i_zone[9];
-};
+} minix_inode;
 
-struct minix_dir_entry
+typedef struct minix_dir_entry
 {
 	unsigned short inode; 
 	char name[0]; 		
-};
+} minix_dir_entry;
 
 void help();
 void showsuper();
-void traverse(int showMore);
-void showzone(char* zoneNumber);
+void traverse(int fd, int detailPrint);
+void showzone(int fd, int zone);
 void showfile(char* fileName);
+void quit();
 /*
 //helper functions
 void itoa(char *s, int x);

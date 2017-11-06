@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <time.h>
+#include "minix.h"
 
 // Calls from main:
 // traverse(fd, 0) for short
