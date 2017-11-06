@@ -1,83 +1,89 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#define BUF 10000
-
 #include "minix.h"
 
-char *image;
+char* image;
 
+int mounted = 0;
 
-//indicates whether image is mounted
-int mounted=0;
+int main() {
 
-int main(){
+	
+	char *intro = "Welcome to MINIX.\n";
+	
+	write(1, intro, strlen(intro));
 
-  char *intro = "Welcome to MINIX.\n";
+	char* userInput;
 
-  write(1, intro, strlen(welcome)); //write welcome message, size
+	//while (1) - indicates that no error or nothing written
+  	//calls functions based on user input
+	while (1) {
+	
+    userInput = (char *) calloc(buffer, 1);
 
-  //holds standard input
-  char *userInput;
-
-  //while (1) - indicates that no error or nothing written
-  //calls functions based on user input
-  while(1) {
-
-    userInput = (char *)calloc(BUF, 1);
-
-    write(1, "minix:",6);
-    read(0, userInput, BUF);
+    write(1, "minix ",7);
+    read(0, userInput, buffer);
 
     //use string compare to
-    if(strcmp(userInput, "minimount")!= NULL){
+    if(strstr(userInput, "minimount")!= NULL){
       //call minimount function
+      
+	image = (char *)calloc(265,1);
 
+	strncopy(image, strstr(userInput, "minimount")+10, strlen(strstr(userInput, "minimount") +11));
+
+	if(access(image, F_OK) != -1){
+		mounted =1;
+		char *mountedMessage = "Disk has been successfully mounted.\n";
+
+		write(1, mountedMessage, strlen(mountedMessage));
+	}
+
+	else {
+		char *mountedMessage = "Sorry, the file does not exist at the location.\n";
+
+		write(1, mountedMessage, strlen(mountedMessage));
+  	}
     }
 
-    else if (strcmp(userInput, "miniumount")){
-      //call miniumount function
-      char *unmountMessage;
-      if(mounted == 0){
-        unmountMessage = "Disk has already been unmounted.\n";
-        write(1, unmountMessage, strlen(unmountMessage));
-      }
-      else{
-        free(image);
-        unmountMessage = "Disk has been unmounted.\n";
-        write(1, unmountMessage, strlen(unmountMessage));
-
-      }
-      free(image);
-      write(1, "Disk has been unmounted.\n", 24);
-
+    else if (strstr(userInput, "miniumount\n")){
+  
+	char *unmountMessage;
+	if(mounted == 0){
+		unmountMessage = "Disk has already been unmounted.\n";
+		write(1, unmountMessage, strlen(unmountMessage));
+	}
+  	else{
+    		free(image);
+    		unmountMessage = "Disk has been unmounted.\n";
+   		write(1, unmountMessage, strlen(unmountMessage));
+  	}
+    
     }
 
-    else if(strcmp(userInput, "showsuper\n")!= NULL){
+    else if(strstr(userInput, "showsuper\n")!= NULL){
         //call showsuper function
-        showsuper();
+        //showsuper();
     }
-    else if(strcmp(userInput, "traverse\n") != NULL){
+    else if(strstr(userInput, "traverse\n") != NULL){
       //call traverse function
-      traverse(0);
+      //traverse(0);
 
     }
-    else if(strcmp(userInput, "traverse -l\n") != NULL){
+    else if(strstr(userInput, "traverse -l\n") != NULL){
       //call traverse -1
-      traverse(1);
+      //traverse(1);
     }
 
-    else if (strcmp(userInput, "showzone") != NULL){
+    else if (strstr(userInput, "showzone") != NULL){
       //call showzone function
+      //showzone();
     }
-    else if(strcmp(userInput, "quit") != NULL){
+    else if(strstr(userInput, "quit") != NULL){
       //call quit function
-      quit();
       if( userInput != NULL){
-        free(userInput);
-        userInput = NULL;
+  		free(userInput);
+  		userInput = NULL;
       }
+      quit();
       return 0;
     }
     else if(strcmp(userInput, "help\n") ==0){
@@ -93,7 +99,9 @@ int main(){
     userInput=NULL;
   }
 
-  free(intro);
 
-  return 0;
+	free(intro);
+
+	return 0;
 }
+
