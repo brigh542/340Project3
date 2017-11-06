@@ -103,7 +103,7 @@ void traverse(int showMore) {
 		char* buf2 = (char *) calloc(32, 1);
 
 		struct minix_dir_entry* dir;
-		int fd = open(imagePath, O_RDONLY);
+		int fd = open(image, O_RDONLY);
 
 		lseek(fd, 1024 * 5, SEEK_SET); //set pointer to the first inode block (i.e 5th block, i.e root inode)
 		read(fd, buf, 32); 		   //read root inode
