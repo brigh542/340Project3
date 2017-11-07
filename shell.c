@@ -75,7 +75,7 @@ void showzone(int fd, char *zone){
 }
 
 
-void traverse() {
+void traverse(int printDetail) {
 
 	void do_ls(char[]);
 	void dostat(char *);
@@ -101,8 +101,9 @@ void traverse() {
 		if ((dir_ptr = opendir(dirname)) == NULL)
 			printf("Cannot open %s\n", dirname);
 		else {
-			while ((direntp = readdir(dir_ptr)) != NULL)
-				dostat(direntp->d_name);
+			if(printDetail == 1) 			
+				while ((direntp = readdir(dir_ptr)) != NULL)
+					dostat(direntp->d_name);
 			closedir(dir_ptr);
 		}
 	}

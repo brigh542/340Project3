@@ -100,10 +100,10 @@ int main(){
 				char *tem = strtok(NULL, "\n ");
 				if(tem == NULL){
 					fd=open(image, O_RDONLY);
-					//traverse(fd, 0);
+					//traverse(0);
 
 				}else if(strcmp(tem, "-l") == 0){
-					//traverse(fd, 1);
+					//traverse(1);
 				}else{
 					printf("Please try again.\n");
 				}
