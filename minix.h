@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>
-#include <string.h>
+#include <dirent.h>
 
 #define DAYS_PER_4YEARS 1461
 
@@ -18,12 +18,12 @@
 
 
 
-//define global variables!
+//define global variables
 
 extern char* image;
 extern int mounted;
 
-//declare structures!
+//declare structures
 
 typedef struct minix_super_block {
 	unsigned short s_ninodes;
@@ -61,9 +61,12 @@ void traverse(int fd, int detailPrint);
 void showzone(int fd, int zone);
 void showfile(char* fileName);
 void quit();
-/*
+
 //helper functions
-void itoa(char *s, int x);
+char * itoa(char *s, int x);
+
+/*
+//helper functions 
 void processImode(int a, char* returnString);
 void processPermissionBytes(char* permissionBytes, char* returnString);
 void convertTime(int seconds, char* returnString);
