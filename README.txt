@@ -1,6 +1,6 @@
 Description: Project3 is an implementation of a Minix file system, which uses a mounted image provided by the user as its content.  The following functions were implemented, a short description of each will follow: help, mount, unmount, showsuper, traverse, showzone, and quit.  We chose not to implement the optional showfile method. Proper syntax and usage is provided in the help function.
 
-Help: gives available functions and proper sytax
+Help: gives available functions and proper syntax
 Mount: mounts an image file provided by the user
 Unmount: unmounts a mounted image
 Showsuper: displays general information about the super block of the Minix system
