@@ -9,9 +9,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>
-#include <dirent.h>
-#include <grp.h>
-#include <pwd.h>
 
 extern char *image;
 extern char *userInput;
@@ -50,10 +47,7 @@ struct minix_dir_entry
 void help();
 void quit();
 void showsuper(int fd);
-void showzone(int fd, char *zone);
+void showzone(int fd, int number);
 void showfile(int fd, char *file);
-
-//void itoa(char *s, int x);
-
 
 #endif
