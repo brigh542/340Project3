@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-std=c99 -g
+CFLAGS=-std=c99 -g -w
 DEPS = shell.h
 OBJ = shell.o finalmain.o
 
