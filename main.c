@@ -77,7 +77,6 @@ int main(){
 				showzone(fd, number);
 				number= 0;
 				zone=NULL;
-
 			}			
 			else{
 				write(1, nomountMessage, strlen(nomountMessage));			
@@ -99,15 +98,15 @@ int main(){
 		}
 		else if(strstr(userInput, "traverse") != NULL){
 			if (mounted ==1){
-				char *tem = strtok(NULL, "\n ");
-				if(tem == NULL){
-					fd=open(image, O_RDONLY);
-					//traverse(fd, 0);
+				char *tem = (char *) calloc(3,1);
+				tem = strstr(userInput, "traverse") + 9;
 
-				}else if(strcmp(tem, "-l") == 0){
-					//traverse(fd, 1);
+				if(strcmp(tem, "-l\n")==0){
+					fd=open(image, O_RDONLY);
+					traverse(fd, 1);
 				}else{
-					printf("Please try again.\n");
+					fd=open(image, O_RDONLY);
+					traverse(fd, 0);
 				}
 					
 			}

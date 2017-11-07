@@ -9,6 +9,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include <time.h>
+
+#define SECONDS_PER_DAY 86400
+#define DAYS_PER_4YEARS 1461
+
 
 extern char *image;
 extern char *userInput;
@@ -49,5 +54,11 @@ void quit();
 void showsuper(int fd);
 void showzone(int fd, int number);
 void showfile(int fd, char *file);
+void traverse(int fd, int flag);
+void changeTime(int seconds, char* string);
+void dtoh(char *string, int x);
+void process(int x, char * string);
+void convert(char *temp, int i);
+char* reverseString(char *string);
 
 #endif
