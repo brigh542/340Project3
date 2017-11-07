@@ -11,6 +11,9 @@
 #include <fcntl.h>
 #include <ctype.h>
 #include <dirent.h>
+#include <grp.h>
+#include <pwd.h>
+
 
 #define DAYS_PER_4YEARS 1461
 
